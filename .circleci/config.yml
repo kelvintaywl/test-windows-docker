@@ -1,16 +1,16 @@
 version: 2.1
 
 orbs:
-  win: circleci/windows@2.2.0
+  win: circleci/windows@2.4.1
 
 jobs:
-  echo:
+  test:
     executor:
       name: win/default
       shell: powershell.exe
     steps:
       - run:
-          name: test Linux containers
+          name: Spin up Linux containers
           command: |
             docker run --rm busybox echo hello_world
             docker image ls
@@ -18,4 +18,4 @@ jobs:
 workflows:
   main:
     jobs:
-      - echo
+      - test
