@@ -1,15 +1,19 @@
 version: 2.1
 
+orbs:
+  win: circleci/windows@2.2.0
+
 jobs:
   echo:
-    docker:
-      - image: cimg/base:stable
+    executor:
+      name: win/default
+      shell: powershell.exe
     steps:
       - run:
-          name: Greet
-          command: echo "I love ${COLOR} builds."
-          environment:
-            COLOR: "green"
+          name: test Linux containers
+          command: |
+            docker run --rm busybox echo hello_world
+            docker image ls
 
 workflows:
   main:
